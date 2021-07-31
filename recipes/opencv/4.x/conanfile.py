@@ -27,6 +27,7 @@ class OpenCVConan(ConanFile):
         "with_jpeg2000": [False, "jasper", "openjpeg"],
         "with_openexr": [True, False],
         "with_eigen": [True, False],
+        "with_ffmpeg": [True, False],
         "with_webp": [True, False],
         "with_gtk": [True, False],
         "with_quirc": [True, False],
@@ -54,6 +55,7 @@ class OpenCVConan(ConanFile):
         "with_tiff": True,
         "with_jpeg2000": "jasper",
         "with_openexr": True,
+        "with_ffmpeg": False,
         "with_eigen": True,
         "with_webp": True,
         "with_gtk": True,
@@ -162,6 +164,8 @@ class OpenCVConan(ConanFile):
             self.requires("gtk/system")
         if self.options.dnn:
             self.requires("protobuf/3.17.1")
+        if self.options.with_ffmpeg:
+            self.requires("ffmpeg/4.2.1")
 
     def validate(self):
         if self.settings.compiler == "Visual Studio" and \
@@ -269,7 +273,7 @@ class OpenCVConan(ConanFile):
         self._cmake.definitions["WITH_ARAVIS"] = False
         self._cmake.definitions["WITH_CLP"] = False
         self._cmake.definitions["WITH_NVCUVID"] = False
-        self._cmake.definitions["WITH_FFMPEG"] = False
+        self._cmake.definitions["WITH_FFMPEG"] = self.options.with_ffmpeg
         self._cmake.definitions["WITH_GSTREAMER"] = False
         self._cmake.definitions["WITH_HALIDE"] = False
         self._cmake.definitions["WITH_HPX"] = False
@@ -470,6 +474,9 @@ class OpenCVConan(ConanFile):
         def protobuf():
             return ["protobuf::protobuf"] if self.options.dnn else []
 
+        def ffmpeg():
+            return ["ffmpeg::ffmpeg"] if self.options.with_ffmpeg else []
+
         def freetype():
             return ["freetype::freetype"] if self.options.get_safe("contrib_freetype") else []
 
@@ -484,8 +491,8 @@ class OpenCVConan(ConanFile):
             {"target": "opencv_photo",      "lib": "photo",      "requires": ["opencv_core", "opencv_imgproc"] + eigen()},
             {"target": "opencv_features2d", "lib": "features2d", "requires": ["opencv_core", "opencv_flann", "opencv_imgproc"] + eigen()},
             {"target": "opencv_imgcodecs",  "lib": "imgcodecs",  "requires": ["opencv_core", "opencv_imgproc", "zlib::zlib"] + eigen() + imageformats_deps()},
-            {"target": "opencv_videoio",    "lib": "videoio",    "requires": ["opencv_core", "opencv_imgproc", "opencv_imgcodecs"] + eigen()},
-            {"target": "opencv_calib3d",    "lib": "calib3d",    "requires": ["opencv_core", "opencv_flann", "opencv_imgproc", "opencv_features2d"]+ eigen()},
+            {"target": "opencv_videoio",    "lib": "videoio",    "requires": ["opencv_core", "opencv_imgproc", "opencv_imgcodecs"] + eigen() + ffmpeg()},
+            {"target": "opencv_calib3d",    "lib": "calib3d",    "requires": ["opencv_core", "opencv_flann", "opencv_imgproc", "opencv_features2d"] + eigen()},
             {"target": "opencv_highgui",    "lib": "highgui",    "requires": ["opencv_core", "opencv_imgproc", "opencv_imgcodecs", "opencv_videoio"] + freetype() + eigen() + gtk()},
             {"target": "opencv_objdetect",  "lib": "objdetect",  "requires": ["opencv_core", "opencv_flann", "opencv_imgproc", "opencv_features2d", "opencv_calib3d"] + eigen() + quirc()},
             {"target": "opencv_stitching",  "lib": "stitching",  "requires": ["opencv_core", "opencv_flann", "opencv_imgproc", "opencv_features2d", "opencv_calib3d"] + xfeatures2d() + eigen()},

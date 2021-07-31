@@ -8,7 +8,7 @@ class ConanGTK(ConanFile):
     license = "LGPL-2.1-or-later"
     homepage = "https://www.gtk.org"
     description = "A free and open-source cross-platform widget toolkit for creating graphical user interfaces"
-    settings = "os"
+    settings = "os" , "arch"
     options = {"version": [2, 3]}
     default_options = {"version": 2}
     topics = ("gui", "widget", "graphical")

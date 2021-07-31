@@ -7,6 +7,7 @@
  */
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
 #define w 400
 
@@ -23,7 +24,8 @@ void MyLine( Mat img, Point start, Point end );
  * @brief Main function
  */
 int main( void ){
-
+cv::VideoCapture cap(
+        "/home/nvr/.local/share/godot/app_userdata/light/render/video.mp4");
   //![create_images]
   /// Windows names
   char atom_window[] = "Drawing 1: Atom";
