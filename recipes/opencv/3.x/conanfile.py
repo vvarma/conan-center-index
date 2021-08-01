@@ -14,30 +14,36 @@ class OpenCVConan(ConanFile):
     url = "https://github.com/conan-io/conan-center-index"
     topics = ("computer-vision", "deep-learning", "image-processing")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False],
-               "fPIC": [True, False],
-               "contrib": [True, False],
-               "parallel": [False, "tbb", "openmp"],
-               "with_jpeg": [False, "libjpeg", "libjpeg-turbo"],
-               "with_png": [True, False],
-               "with_tiff": [True, False],
-               "with_jasper": [True, False],
-               "with_openexr": [True, False],
-               "with_eigen": [True, False],
-               "with_webp": [True, False],
-               "with_gtk": [True, False]}
-    default_options = {"shared": False,
-                       "fPIC": True,
-                       "parallel": False,
-                       "contrib": False,
-                       "with_jpeg": "libjpeg",
-                       "with_png": True,
-                       "with_tiff": True,
-                       "with_jasper": True,
-                       "with_openexr": True,
-                       "with_eigen": True,
-                       "with_webp": True,
-                       "with_gtk": True}
+    options = {
+        "shared": [True, False],
+        "fPIC": [True, False],
+        "contrib": [True, False],
+        "parallel": [False, "tbb", "openmp"],
+        "with_ade": [True, False],
+        "with_jpeg": [False, "libjpeg", "libjpeg-turbo"],
+        "with_png": [True, False],
+        "with_tiff": [True, False],
+        "with_jasper": [True, False],
+        "with_openexr": [True, False],
+        "with_eigen": [True, False],
+        "with_webp": [True, False],
+        "with_gtk": [True, False]
+    }
+    default_options = {
+        "shared": False,
+        "fPIC": True,
+        "parallel": False,
+        "contrib": False,
+        "with_ade": False,
+        "with_jpeg": "libjpeg",
+        "with_png": True,
+        "with_tiff": True,
+        "with_jasper": True,
+        "with_openexr": True,
+        "with_eigen": True,
+        "with_webp": True,
+        "with_gtk": True
+    }
 
     short_paths = True
 
@@ -179,7 +185,7 @@ class OpenCVConan(ConanFile):
         self._cmake.definitions["WITH_OPENCL"] = False
         self._cmake.definitions["WITH_CUDA"] = False
         self._cmake.definitions["WITH_1394"] = False
-        self._cmake.definitions["WITH_ADE"] = False
+        self._cmake.definitions["WITH_ADE"] = self.options.with_ade
         self._cmake.definitions["WITH_ARAVIS"] = False
         self._cmake.definitions["WITH_CLP"] = False
         self._cmake.definitions["WITH_HALIDE"] = False
