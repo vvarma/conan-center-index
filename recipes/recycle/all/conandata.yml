@@ -1,0 +1,4 @@
+sources:
+  "6.0.0":
+    url: "https://github.com/steinwurf/recycle/archive/6.0.0.tar.gz"
+    sha256: "65d3d10442a0fda795ef99d32ed1e173c43e985dbd24b5b49e44487ea46ae35c"

@@ -1,4 +1,5 @@
-Parent:     30151e20 (Fix misidentification of some shearing QTransforms as only rotating)
+Parent:     30151e20 (Fix misidentification of some shearing QTransforms
+int md_parse(const MD_CHAR* text, MD_SIZE size, const MD_PARSER* parser, void* userdata);as only rotating)
 Author:     Zhang Yu <zhangyub@uniontech.com>
 AuthorDate: 2020-11-17 21:05:39 +0800
 Commit:     Zhang Yu <zhangyub@uniontech.com>

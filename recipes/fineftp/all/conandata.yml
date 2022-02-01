@@ -1,0 +1,4 @@
+sources:
+  "1.2.0":
+    url: "https://github.com/continental/fineftp-server/archive/v1.2.0.tar.gz"
+    sha256: "f943200b677d48eb4fd5896d0a359a2d208d6c85b4d122faf8dd4227b6ffa102"

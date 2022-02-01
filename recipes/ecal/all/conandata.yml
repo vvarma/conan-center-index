@@ -1,0 +1,7 @@
+sources:
+  "5.9.2":
+    url: "https://github.com/continental/ecal/archive/v5.9.2.tar.gz"
+    sha256: "dafcaa1e9088b7e8a715bb3a53ef3cafa8ea72ca9d350476e95bf67199100c4e"
+  "5.9.2-latest":
+    url: "https://github.com/vvarma/ecal/archive/7aba80585e71a03fc40a620c14750b09012bfad5.tar.gz"
+    sha256: "1c2e8cf4641be0a9da27c56872bdadfffce6350a196c823817e5e4a3b696cb22"

@@ -313,6 +313,7 @@ class QtConan(ConanFile):
 
     def requirements(self):
         self.requires("zlib/1.2.11")
+        self.requires("md4c/0.4.8")
         if self.options.openssl:
             self.requires("openssl/1.1.1k")
         if self.options.with_pcre2:
@@ -866,7 +867,7 @@ Examples = bin/datadir/examples""")
                 requires.append("Core")
             self.cpp_info.components[componentname].requires = _get_corrected_reqs(requires)
 
-        core_reqs = ["zlib::zlib"]
+        core_reqs = ["zlib::zlib", "md4c::md4c"]
         if self.options.with_pcre2:
             core_reqs.append("pcre2::pcre2")
         if self.options.with_doubleconversion:

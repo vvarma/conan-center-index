@@ -1,0 +1,4 @@
+sources:
+  "4.17":
+    url: "https://github.com/brofield/simpleini/archive/4.17.tar.gz"
+    sha256: "14e5bc1cb318ed374d45d6faf48da0b79db7e069c12ec6e090523b8652ef47c7"
