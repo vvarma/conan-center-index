@@ -93,12 +93,10 @@ class GLibConan(ConanFile):
             # for Linux, gettext is provided by libc
             self.requires("libgettext/0.21")
 
-        if is_apple_os(self.settings.os):
+        if self.settings.os == "Macos" and is_apple_os(self.settings.os):
             self.requires("libiconv/1.17")
 
     def validate(self):
-        if hasattr(self, 'settings_build') and cross_building(self, skip_x64_x86=True):
-            raise ConanInvalidConfiguration("Cross-building not implemented")
         if Version(self.version) >= "2.69.0" and not self.options.with_pcre:
             raise ConanInvalidConfiguration("option glib:with_pcre must be True for glib >= 2.69.0")
         if self.settings.os == "Windows" and not self.options.shared and Version(self.version) < "2.71.1":
@@ -121,7 +119,7 @@ class GLibConan(ConanFile):
         self.folders.source = self._source_subfolder
 
     def generate(self):
-        if is_apple_os(self.settings.os):
+        if self.settings.os == "Macos" and is_apple_os(self.settings.os):
             self.conf["tools.apple:sdk_path"] = apple_sdk_path(self)
 
         tc = PkgConfigDeps(self)
@@ -141,7 +139,7 @@ class GLibConan(ConanFile):
         tc = MesonToolchain(self)
 
         defs = dict()
-        if is_apple_os(self.settings.os):
+        if self.settings.os == "Macos" and is_apple_os(self.settings.os):
             defs["iconv"] = "external"  # https://gitlab.gnome.org/GNOME/glib/issues/1557
         defs["selinux"] = "enabled" if self.options.get_safe("with_selinux") else "disabled"
         defs["libmount"] = "enabled" if self.options.get_safe("with_mount") else "disabled"

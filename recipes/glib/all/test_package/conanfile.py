@@ -6,6 +6,9 @@ class TestPackageConan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     generators = "cmake", "cmake_find_package_multi", "pkg_config"
 
+    def build_requirements(self):
+        self.build_requires("pkgconf/1.7.4")
+
     def build(self):
         if self.settings.os != "Windows":
             with tools.environment_append({'PKG_CONFIG_PATH': "."}):
