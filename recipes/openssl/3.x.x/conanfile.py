@@ -79,6 +79,7 @@ class OpenSSLConan(ConanFile):
         "no_whirlpool": [True, False],
         "no_zlib": [True, False],
         "openssldir": "ANY",
+        "enable_trace": [True, False],
     }
     default_options = {key: False for key in options.keys()}
     default_options["fPIC"] = True
